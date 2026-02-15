@@ -12,13 +12,13 @@ class VisibilityStruct extends BaseStruct {
     bool? centerTopCreat,
     bool? todayRecordsListview,
     bool? weakRecordsListview,
-    bool? mounthFourwardRecordsListview,
+    bool? monthCurentRecordsListview,
   })  : _centerTopHeader = centerTopHeader,
         _centerTopSearch = centerTopSearch,
         _centerTopCreat = centerTopCreat,
         _todayRecordsListview = todayRecordsListview,
         _weakRecordsListview = weakRecordsListview,
-        _mounthFourwardRecordsListview = mounthFourwardRecordsListview;
+        _monthCurentRecordsListview = monthCurentRecordsListview;
 
   // "CENTER-TOP-HEADER" field.
   bool? _centerTopHeader;
@@ -55,15 +55,13 @@ class VisibilityStruct extends BaseStruct {
 
   bool hasWeakRecordsListview() => _weakRecordsListview != null;
 
-  // "MOUNTH-FOURWARD-RECORDS-LISTVIEW" field.
-  bool? _mounthFourwardRecordsListview;
-  bool get mounthFourwardRecordsListview =>
-      _mounthFourwardRecordsListview ?? false;
-  set mounthFourwardRecordsListview(bool? val) =>
-      _mounthFourwardRecordsListview = val;
+  // "MONTH-CURENT-RECORDS-LISTVIEW" field.
+  bool? _monthCurentRecordsListview;
+  bool get monthCurentRecordsListview => _monthCurentRecordsListview ?? false;
+  set monthCurentRecordsListview(bool? val) =>
+      _monthCurentRecordsListview = val;
 
-  bool hasMounthFourwardRecordsListview() =>
-      _mounthFourwardRecordsListview != null;
+  bool hasMonthCurentRecordsListview() => _monthCurentRecordsListview != null;
 
   static VisibilityStruct fromMap(Map<String, dynamic> data) =>
       VisibilityStruct(
@@ -72,8 +70,8 @@ class VisibilityStruct extends BaseStruct {
         centerTopCreat: data['CENTER-TOP-CREAT'] as bool?,
         todayRecordsListview: data['TODAY-RECORDS-LISTVIEW'] as bool?,
         weakRecordsListview: data['WEAK-RECORDS-LISTVIEW'] as bool?,
-        mounthFourwardRecordsListview:
-            data['MOUNTH-FOURWARD-RECORDS-LISTVIEW'] as bool?,
+        monthCurentRecordsListview:
+            data['MONTH-CURENT-RECORDS-LISTVIEW'] as bool?,
       );
 
   static VisibilityStruct? maybeFromMap(dynamic data) => data is Map
@@ -86,7 +84,7 @@ class VisibilityStruct extends BaseStruct {
         'CENTER-TOP-CREAT': _centerTopCreat,
         'TODAY-RECORDS-LISTVIEW': _todayRecordsListview,
         'WEAK-RECORDS-LISTVIEW': _weakRecordsListview,
-        'MOUNTH-FOURWARD-RECORDS-LISTVIEW': _mounthFourwardRecordsListview,
+        'MONTH-CURENT-RECORDS-LISTVIEW': _monthCurentRecordsListview,
       }.withoutNulls;
 
   @override
@@ -111,8 +109,8 @@ class VisibilityStruct extends BaseStruct {
           _weakRecordsListview,
           ParamType.bool,
         ),
-        'MOUNTH-FOURWARD-RECORDS-LISTVIEW': serializeParam(
-          _mounthFourwardRecordsListview,
+        'MONTH-CURENT-RECORDS-LISTVIEW': serializeParam(
+          _monthCurentRecordsListview,
           ParamType.bool,
         ),
       }.withoutNulls;
@@ -144,8 +142,8 @@ class VisibilityStruct extends BaseStruct {
           ParamType.bool,
           false,
         ),
-        mounthFourwardRecordsListview: deserializeParam(
-          data['MOUNTH-FOURWARD-RECORDS-LISTVIEW'],
+        monthCurentRecordsListview: deserializeParam(
+          data['MONTH-CURENT-RECORDS-LISTVIEW'],
           ParamType.bool,
           false,
         ),
@@ -162,7 +160,7 @@ class VisibilityStruct extends BaseStruct {
         centerTopCreat == other.centerTopCreat &&
         todayRecordsListview == other.todayRecordsListview &&
         weakRecordsListview == other.weakRecordsListview &&
-        mounthFourwardRecordsListview == other.mounthFourwardRecordsListview;
+        monthCurentRecordsListview == other.monthCurentRecordsListview;
   }
 
   @override
@@ -172,7 +170,7 @@ class VisibilityStruct extends BaseStruct {
         centerTopCreat,
         todayRecordsListview,
         weakRecordsListview,
-        mounthFourwardRecordsListview
+        monthCurentRecordsListview
       ]);
 }
 
@@ -182,7 +180,7 @@ VisibilityStruct createVisibilityStruct({
   bool? centerTopCreat,
   bool? todayRecordsListview,
   bool? weakRecordsListview,
-  bool? mounthFourwardRecordsListview,
+  bool? monthCurentRecordsListview,
 }) =>
     VisibilityStruct(
       centerTopHeader: centerTopHeader,
@@ -190,5 +188,5 @@ VisibilityStruct createVisibilityStruct({
       centerTopCreat: centerTopCreat,
       todayRecordsListview: todayRecordsListview,
       weakRecordsListview: weakRecordsListview,
-      mounthFourwardRecordsListview: mounthFourwardRecordsListview,
+      monthCurentRecordsListview: monthCurentRecordsListview,
     );

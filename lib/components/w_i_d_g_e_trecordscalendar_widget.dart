@@ -39,6 +39,8 @@ class _WIDGETrecordscalendarWidgetState
           _model.appointmentsData = data;
           safeSetState(() {});
         },
+        'week',
+        0,
       );
     });
 

@@ -119,18 +119,29 @@ List<String> getCalendarDates(
   String? viewType,
   AppointmentsPageDataStruct? appointmentsData,
 ) {
-  if (appointmentsData == null) return [];
+  if (appointmentsData == null) {
+    return [];
+  }
+
+  final List<String> result = [];
 
   if (viewType == 'week') {
-    return appointmentsData.weekStats.dailySlots
-        .map((slot) => slot.date)
-        .toList();
+    for (var slot in appointmentsData.weekStats.dailySlots) {
+      // Берем ТОЛЬКО первые 10 символов (yyyy-MM-dd)
+      final fullDate = slot.date;
+      final shortDate = fullDate.substring(0, 10);
+      result.add(shortDate);
+    }
   } else {
-    // 👇 ТЕПЕРЬ берем из monthStats
-    return appointmentsData.monthStats.dailySlots
-        .map((slot) => slot.date)
-        .toList();
+    for (var slot in appointmentsData.monthStats.dailySlots) {
+      // Берем ТОЛЬКО первые 10 символов (yyyy-MM-dd)
+      final fullDate = slot.date;
+      final shortDate = fullDate.substring(0, 10);
+      result.add(shortDate);
+    }
   }
+
+  return result;
 }
 
 String? getCalendarTitle(
@@ -193,7 +204,8 @@ dynamic getDaySlotByDate(
     if (dailySlots == null) return null;
 
     for (var slot in dailySlots) {
-      if (slot.date == dateString) {
+      // ⭐ ИСПРАВЛЕНО: Используем startsWith для сравнения
+      if (slot.date.startsWith(dateString)) {
         return {
           'date': slot.date,
           'bookedSlots': slot.bookedSlots ?? 0,
@@ -211,7 +223,8 @@ dynamic getDaySlotByDate(
     if (dailySlots == null) return null;
 
     for (var slot in dailySlots) {
-      if (slot.date == dateString) {
+      // ⭐ ИСПРАВЛЕНО: Используем startsWith для сравнения
+      if (slot.date.startsWith(dateString)) {
         return {
           'date': slot.date,
           'bookedSlots': slot.bookedSlots ?? 0,
@@ -223,4 +236,25 @@ dynamic getDaySlotByDate(
   }
 
   return null;
+}
+
+String? getTargetDate(
+  String viewType,
+  int offset,
+) {
+  final now = DateTime.now();
+
+  if (viewType == 'week') {
+    // Смещаем на offset недель
+    final target = now.add(Duration(days: offset * 7));
+    return DateFormat('yyyy-MM-dd').format(target);
+  } else {
+    // Смещаем на offset месяцев
+    final target = DateTime(
+      now.year,
+      now.month + offset,
+      now.day,
+    );
+    return DateFormat('yyyy-MM-dd').format(target);
+  }
 }

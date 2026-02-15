@@ -22,21 +22,48 @@ RealtimeChannel? _clientsChannel;
 RealtimeChannel? _mastersChannel;
 RealtimeChannel? _servicesChannel;
 
-// ⭐ ОСНОВНАЯ ФУНКЦИЯ ⭐
 Future<void> subscribeToAppointmentsData(
   String organizationId,
   Future Function(AppointmentsPageDataStruct data) onDataUpdate,
+  String viewType,
+  int? offset,
 ) async {
   final supabase = SupaFlow.client;
+
+  // Используем 0 если offset не передан
+  final effectiveOffset = offset ?? 0;
+
+  // Функция для вычисления targetDate на основе offset
+  String _getTargetDate() {
+    final now = DateTime.now();
+    DateTime targetDate;
+
+    if (viewType == 'week') {
+      // Смещаем на offset недель
+      targetDate = now.add(Duration(days: effectiveOffset * 7));
+    } else {
+      // Смещаем на offset месяцев
+      targetDate = DateTime(now.year, now.month + effectiveOffset, now.day);
+    }
+
+    return DateFormat('yyyy-MM-dd').format(targetDate);
+  }
 
   // Функция для загрузки данных
   Future<void> fetchData() async {
     try {
+      final targetDate = _getTargetDate();
       print('📥 Fetching appointments data for organization: $organizationId');
+      print(
+          '📅 View: $viewType, Offset: $effectiveOffset, Target date: $targetDate');
 
       final response = await supabase.rpc(
         'get_appointments_page_data',
-        params: {'org_id': organizationId},
+        params: {
+          'org_id': organizationId,
+          'view_type': viewType,
+          'target_date': targetDate,
+        },
       );
 
       if (response != null) {
@@ -53,37 +80,6 @@ Future<void> subscribeToAppointmentsData(
         print('✅ Data parsed successfully');
         print('📊 Top level keys: ${dataMap.keys.join(', ')}');
 
-        // Проверяем наличие новых полей
-        if (dataMap['weekStats'] != null) {
-          var weekStats = dataMap['weekStats'] as Map;
-
-          // Проверяем dailySlots
-          if (weekStats['dailySlots'] != null) {
-            var dailySlots = weekStats['dailySlots'] as List;
-            print('📅 dailySlots length: ${dailySlots.length}');
-            if (dailySlots.isNotEmpty) {
-              var firstSlot = dailySlots.first as Map;
-              print(
-                  '   - Has workloadByTime: ${firstSlot.containsKey('workloadByTime')}');
-            }
-          }
-
-          // Проверяем appointments с timeInterval
-          if (weekStats['appointments'] != null) {
-            var appointments = weekStats['appointments'] as List;
-            print('📋 appointments length: ${appointments.length}');
-            if (appointments.isNotEmpty) {
-              var firstAppt = appointments.first as Map;
-              print(
-                  '   - Has time_interval: ${firstAppt.containsKey('time_interval')}');
-              if (firstAppt.containsKey('time_interval')) {
-                print(
-                    '   - time_interval example: ${firstAppt['time_interval']}');
-              }
-            }
-          }
-        }
-
         // Создаем структуру
         final appointmentsData = AppointmentsPageDataStruct.fromMap(dataMap);
 
@@ -91,10 +87,6 @@ Future<void> subscribeToAppointmentsData(
         await onDataUpdate(appointmentsData);
 
         print('✅ Appointments data loaded successfully');
-        print(
-            '📊 Today appointments: ${appointmentsData.todayStats?.appointments?.length}');
-        print(
-            '📊 Week appointments: ${appointmentsData.weekStats?.appointments?.length}');
       }
     } catch (e, stackTrace) {
       print('❌ Error fetching appointments data: $e');
