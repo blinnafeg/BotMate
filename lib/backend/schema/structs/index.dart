@@ -1,0 +1,23 @@
+export '/backend/schema/util/schema_util.dart';
+
+export 'appointments_page_data_struct.dart';
+export 'daydate_struct.dart';
+export 'day_stats_struct.dart';
+export 'month_stats_struct.dart';
+export 'visibility_struct.dart';
+export 'widgets_data_struct.dart';
+export 'appointments_struct.dart';
+export 'available_slots_struct.dart';
+export 'client_struct.dart';
+export 'daily_slots_struct.dart';
+export 'day_work_hours_struct.dart';
+export 'master_struct.dart';
+export 'master_stats_struct.dart';
+export 'master_work_hours_struct.dart';
+export 'month_backward_stats_struct.dart';
+export 'month_forward_stats_struct.dart';
+export 'occupied_intervals_struct.dart';
+export 'service_struct.dart';
+export 'today_stats_struct.dart';
+export 'week_stats_struct.dart';
+export 'work_hours_info_struct.dart';
