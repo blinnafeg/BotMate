@@ -3,7 +3,9 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'w_i_d_g_e_tappointmentscentertop_model.dart';
@@ -31,6 +33,24 @@ class _WIDGETappointmentscentertopWidgetState
   void initState() {
     super.initState();
     _model = createModel(context, () => WIDGETappointmentscentertopModel());
+
+    // On component load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await actions.loadInitialBookingData(
+        '22222222-2222-2222-2222-222222222222',
+        (services, clients) async {
+          FFAppState().updateWIDGETSDATAStruct(
+            (e) => e
+              ..updateBookingFormData(
+                (e) => e
+                  ..services = services.toList()
+                  ..clients = clients.toList(),
+              ),
+          );
+          safeSetState(() {});
+        },
+      );
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -277,12 +297,16 @@ class _WIDGETappointmentscentertopWidgetState
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
-                                    FFAppState().updateVISIBILITYStruct(
-                                      (e) => e
-                                        ..centerTopHeader = !e.centerTopHeader
-                                        ..centerTopCreat = !e.centerTopCreat,
+                                    FFAppState().updateWIDGETSDATAStruct(
+                                      (e) => e..bookingFormData = null,
                                     );
                                     safeSetState(() {});
+                                    FFAppState().updateVISIBILITYStruct(
+                                      (e) => e
+                                        ..centerTopCreat = !e.centerTopCreat
+                                        ..centerTopHeader = !e.centerTopHeader,
+                                    );
+                                    _model.updatePage(() {});
                                   },
                                   child: Icon(
                                     Icons.close,
@@ -333,84 +357,47 @@ class _WIDGETappointmentscentertopWidgetState
                                         ),
                                         child: FlutterFlowDropDown<String>(
                                           controller: _model
-                                                  .dropDownValueController1 ??=
+                                                  .serviceDropDownValueController ??=
                                               FormFieldController<String>(null),
-                                          options: [
-                                            'Option 1',
-                                            'Option 2',
-                                            'Option 3'
-                                          ],
-                                          onChanged: (val) => safeSetState(() =>
-                                              _model.dropDownValue1 = val),
-                                          width: 120.0,
-                                          height: 30.0,
-                                          textStyle: FlutterFlowTheme.of(
-                                                  context)
-                                              .bodyMedium
-                                              .override(
-                                                font: GoogleFonts.openSans(
-                                                  fontWeight:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontWeight,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontStyle,
-                                                ),
-                                                letterSpacing: 0.0,
-                                                fontWeight:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .fontWeight,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .fontStyle,
+                                          options: FFAppState()
+                                              .WIDGETSDATA
+                                              .bookingFormData
+                                              .services
+                                              .map((e) => e.name)
+                                              .toList(),
+                                          onChanged: (val) async {
+                                            safeSetState(() => _model
+                                                .serviceDropDownValue = val);
+                                            await actions.getMastersForService(
+                                              valueOrDefault<String>(
+                                                FFAppState()
+                                                    .WIDGETSDATA
+                                                    .bookingFormData
+                                                    .services
+                                                    .where((e) =>
+                                                        e.name ==
+                                                        _model
+                                                            .serviceDropDownValue)
+                                                    .toList()
+                                                    .firstOrNull
+                                                    ?.id,
+                                                '0',
                                               ),
-                                          hintText: 'Клиент',
-                                          icon: Icon(
-                                            Icons.keyboard_arrow_down_rounded,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            size: 24.0,
-                                          ),
-                                          elevation: 0.0,
-                                          borderColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .alternate,
-                                          borderWidth: 1.0,
-                                          borderRadius: 5.0,
-                                          margin:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  12.0, 0.0, 12.0, 0.0),
-                                          hidesUnderline: true,
-                                          isOverButton: false,
-                                          isSearchable: false,
-                                          isMultiSelect: false,
-                                        ),
-                                      ),
-                                    ),
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(5.0),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
-                                        ),
-                                        child: FlutterFlowDropDown<String>(
-                                          controller: _model
-                                                  .dropDownValueController2 ??=
-                                              FormFieldController<String>(null),
-                                          options: [
-                                            'Option 1',
-                                            'Option 2',
-                                            'Option 3'
-                                          ],
-                                          onChanged: (val) => safeSetState(() =>
-                                              _model.dropDownValue2 = val),
+                                              '22222222-2222-2222-2222-222222222222',
+                                              (masters) async {
+                                                FFAppState()
+                                                    .updateWIDGETSDATAStruct(
+                                                  (e) => e
+                                                    ..updateBookingFormData(
+                                                      (e) => e
+                                                        ..mastersForService =
+                                                            masters.toList(),
+                                                    ),
+                                                );
+                                                safeSetState(() {});
+                                              },
+                                            );
+                                          },
                                           width: 120.0,
                                           height: 30.0,
                                           textStyle: FlutterFlowTheme.of(
@@ -462,6 +449,144 @@ class _WIDGETappointmentscentertopWidgetState
                                         ),
                                       ),
                                     ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                      ),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          final _datePickedDate =
+                                              await showDatePicker(
+                                            context: context,
+                                            initialDate: getCurrentTimestamp,
+                                            firstDate: getCurrentTimestamp,
+                                            lastDate: DateTime(2050),
+                                            builder: (context, child) {
+                                              return wrapInMaterialDatePickerTheme(
+                                                context,
+                                                child!,
+                                                headerBackgroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                headerForegroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .info,
+                                                headerTextStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .headlineLarge
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .openSansCondensed(
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .headlineLarge
+                                                                    .fontStyle,
+                                                          ),
+                                                          fontSize: 32.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .headlineLarge
+                                                                  .fontStyle,
+                                                        ),
+                                                pickerBackgroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
+                                                pickerForegroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                selectedDateTimeBackgroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                selectedDateTimeForegroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .info,
+                                                actionButtonForegroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                iconSize: 24.0,
+                                              );
+                                            },
+                                          );
+
+                                          if (_datePickedDate != null) {
+                                            safeSetState(() {
+                                              _model.datePicked = DateTime(
+                                                _datePickedDate.year,
+                                                _datePickedDate.month,
+                                                _datePickedDate.day,
+                                              );
+                                            });
+                                          } else if (_model.datePicked !=
+                                              null) {
+                                            safeSetState(() {
+                                              _model.datePicked =
+                                                  getCurrentTimestamp;
+                                            });
+                                          }
+                                        },
+                                        text: 'Дата',
+                                        icon: Icon(
+                                          FFIcons.ktimerLight,
+                                          size: 15.0,
+                                        ),
+                                        options: FFButtonOptions(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16.0, 0.0, 16.0, 0.0),
+                                          iconPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .bodySmall
+                                              .override(
+                                                font: GoogleFonts.openSans(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodySmall
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodySmall
+                                                          .fontStyle,
+                                                ),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodySmall
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodySmall
+                                                        .fontStyle,
+                                              ),
+                                          elevation: 0.0,
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(4.0),
+                                        ),
+                                      ),
+                                    ),
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(5.0),
                                       child: Container(
@@ -471,15 +596,48 @@ class _WIDGETappointmentscentertopWidgetState
                                         ),
                                         child: FlutterFlowDropDown<String>(
                                           controller: _model
-                                                  .dropDownValueController3 ??=
+                                                  .masterDropDownValueController ??=
                                               FormFieldController<String>(null),
-                                          options: [
-                                            'Option 1',
-                                            'Option 2',
-                                            'Option 3'
-                                          ],
-                                          onChanged: (val) => safeSetState(() =>
-                                              _model.dropDownValue3 = val),
+                                          options: FFAppState()
+                                              .WIDGETSDATA
+                                              .bookingFormData
+                                              .mastersForService
+                                              .map((e) => e.name)
+                                              .toList(),
+                                          onChanged: (val) async {
+                                            safeSetState(() => _model
+                                                .masterDropDownValue = val);
+                                            await actions.getAvailableSlots(
+                                              '22222222-2222-2222-2222-222222222222',
+                                              valueOrDefault<String>(
+                                                FFAppState()
+                                                    .WIDGETSDATA
+                                                    .bookingFormData
+                                                    .mastersForService
+                                                    .where((e) =>
+                                                        e.name ==
+                                                        _model
+                                                            .masterDropDownValue)
+                                                    .toList()
+                                                    .firstOrNull
+                                                    ?.id,
+                                                '0',
+                                              ),
+                                              _model.datePicked!.toString(),
+                                              (slots) async {
+                                                FFAppState()
+                                                    .updateWIDGETSDATAStruct(
+                                                  (e) => e
+                                                    ..updateBookingFormData(
+                                                      (e) => e
+                                                        ..availableSlots =
+                                                            slots.toList(),
+                                                    ),
+                                                );
+                                                safeSetState(() {});
+                                              },
+                                            );
+                                          },
                                           width: 120.0,
                                           height: 30.0,
                                           textStyle: FlutterFlowTheme.of(
@@ -540,15 +698,14 @@ class _WIDGETappointmentscentertopWidgetState
                                         ),
                                         child: FlutterFlowDropDown<String>(
                                           controller: _model
-                                                  .dropDownValueController4 ??=
+                                                  .slotDropDownValueController ??=
                                               FormFieldController<String>(null),
-                                          options: [
-                                            'Option 1',
-                                            'Option 2',
-                                            'Option 3'
-                                          ],
+                                          options: FFAppState()
+                                              .WIDGETSDATA
+                                              .bookingFormData
+                                              .availableSlots,
                                           onChanged: (val) => safeSetState(() =>
-                                              _model.dropDownValue4 = val),
+                                              _model.slotDropDownValue = val),
                                           width: 120.0,
                                           height: 30.0,
                                           textStyle: FlutterFlowTheme.of(
@@ -577,7 +734,7 @@ class _WIDGETappointmentscentertopWidgetState
                                                         .bodyMedium
                                                         .fontStyle,
                                               ),
-                                          hintText: 'Дата',
+                                          hintText: 'Время',
                                           icon: Icon(
                                             Icons.keyboard_arrow_down_rounded,
                                             color: FlutterFlowTheme.of(context)
@@ -600,6 +757,129 @@ class _WIDGETappointmentscentertopWidgetState
                                         ),
                                       ),
                                     ),
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        ),
+                                        child: FlutterFlowDropDown<String>(
+                                          controller: _model
+                                                  .clientDropDownValueController ??=
+                                              FormFieldController<String>(null),
+                                          options: FFAppState()
+                                              .WIDGETSDATA
+                                              .bookingFormData
+                                              .clients
+                                              .map((e) => e.name)
+                                              .toList(),
+                                          onChanged: (val) => safeSetState(() =>
+                                              _model.clientDropDownValue = val),
+                                          width: 120.0,
+                                          height: 30.0,
+                                          searchHintTextStyle: FlutterFlowTheme
+                                                  .of(context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts.openSans(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                          searchTextStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .bodyMedium
+                                              .override(
+                                                font: GoogleFonts.openSans(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
+                                                ),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .bodyMedium
+                                              .override(
+                                                font: GoogleFonts.openSans(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
+                                                ),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                          hintText: 'Клиент',
+                                          searchHintText: 'Поиск',
+                                          icon: Icon(
+                                            Icons.keyboard_arrow_down_rounded,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 24.0,
+                                          ),
+                                          elevation: 0.0,
+                                          borderColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
+                                          borderWidth: 1.0,
+                                          borderRadius: 5.0,
+                                          margin:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  12.0, 0.0, 12.0, 0.0),
+                                          hidesUnderline: true,
+                                          isOverButton: false,
+                                          isSearchable: true,
+                                          isMultiSelect: false,
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -607,8 +887,84 @@ class _WIDGETappointmentscentertopWidgetState
                                 child: Container(
                                   decoration: BoxDecoration(),
                                   child: FFButtonWidget(
-                                    onPressed: () {
-                                      print('Button pressed ...');
+                                    onPressed: () async {
+                                      await actions.createAppointment(
+                                        '22222222-2222-2222-2222-222222222222',
+                                        valueOrDefault<String>(
+                                          FFAppState()
+                                              .WIDGETSDATA
+                                              .bookingFormData
+                                              .clients
+                                              .where((e) =>
+                                                  e.name ==
+                                                  _model.clientDropDownValue)
+                                              .toList()
+                                              .firstOrNull
+                                              ?.id,
+                                          '0',
+                                        ),
+                                        valueOrDefault<String>(
+                                          FFAppState()
+                                              .WIDGETSDATA
+                                              .bookingFormData
+                                              .services
+                                              .where((e) =>
+                                                  e.name ==
+                                                  _model.serviceDropDownValue)
+                                              .toList()
+                                              .firstOrNull
+                                              ?.id,
+                                          '0',
+                                        ),
+                                        valueOrDefault<String>(
+                                          FFAppState()
+                                              .WIDGETSDATA
+                                              .bookingFormData
+                                              .mastersForService
+                                              .where((e) =>
+                                                  e.name ==
+                                                  _model.masterDropDownValue)
+                                              .toList()
+                                              .firstOrNull
+                                              ?.id,
+                                          '0',
+                                        ),
+                                        _model.datePicked!.toString(),
+                                        _model.slotDropDownValue!,
+                                        '',
+                                        () async {},
+                                        (error) async {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                error,
+                                                style: TextStyle(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                ),
+                                              ),
+                                              duration:
+                                                  Duration(milliseconds: 4000),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondary,
+                                            ),
+                                          );
+                                        },
+                                      );
+                                      FFAppState().updateWIDGETSDATAStruct(
+                                        (e) => e..bookingFormData = null,
+                                      );
+                                      safeSetState(() {});
+                                      FFAppState().updateVISIBILITYStruct(
+                                        (e) => e
+                                          ..centerTopCreat = !e.centerTopCreat
+                                          ..centerTopHeader =
+                                              !e.centerTopHeader,
+                                      );
+                                      _model.updatePage(() {});
                                     },
                                     text: 'СОЗДАТЬ',
                                     icon: Icon(
@@ -684,7 +1040,7 @@ class _WIDGETappointmentscentertopWidgetState
                                       decoration: BoxDecoration(),
                                       child: FlutterFlowDropDown<String>(
                                         controller: _model
-                                                .dropDownValueController5 ??=
+                                                .dropDownValueController1 ??=
                                             FormFieldController<String>(null),
                                         options: [
                                           'Option 1',
@@ -692,7 +1048,7 @@ class _WIDGETappointmentscentertopWidgetState
                                           'Option 3'
                                         ],
                                         onChanged: (val) => safeSetState(
-                                            () => _model.dropDownValue5 = val),
+                                            () => _model.dropDownValue1 = val),
                                         width: 200.0,
                                         height: 30.0,
                                         textStyle: FlutterFlowTheme.of(context)
@@ -745,7 +1101,7 @@ class _WIDGETappointmentscentertopWidgetState
                                       decoration: BoxDecoration(),
                                       child: FlutterFlowDropDown<String>(
                                         controller: _model
-                                                .dropDownValueController6 ??=
+                                                .dropDownValueController2 ??=
                                             FormFieldController<String>(null),
                                         options: [
                                           'Option 1',
@@ -753,7 +1109,7 @@ class _WIDGETappointmentscentertopWidgetState
                                           'Option 3'
                                         ],
                                         onChanged: (val) => safeSetState(
-                                            () => _model.dropDownValue6 = val),
+                                            () => _model.dropDownValue2 = val),
                                         width: 200.0,
                                         height: 30.0,
                                         textStyle: FlutterFlowTheme.of(context)
@@ -806,7 +1162,7 @@ class _WIDGETappointmentscentertopWidgetState
                                       decoration: BoxDecoration(),
                                       child: FlutterFlowDropDown<String>(
                                         controller: _model
-                                                .dropDownValueController7 ??=
+                                                .dropDownValueController3 ??=
                                             FormFieldController<String>(null),
                                         options: [
                                           'Option 1',
@@ -814,7 +1170,7 @@ class _WIDGETappointmentscentertopWidgetState
                                           'Option 3'
                                         ],
                                         onChanged: (val) => safeSetState(
-                                            () => _model.dropDownValue7 = val),
+                                            () => _model.dropDownValue3 = val),
                                         width: 200.0,
                                         height: 30.0,
                                         textStyle: FlutterFlowTheme.of(context)
@@ -867,7 +1223,7 @@ class _WIDGETappointmentscentertopWidgetState
                                       decoration: BoxDecoration(),
                                       child: FlutterFlowDropDown<String>(
                                         controller: _model
-                                                .dropDownValueController8 ??=
+                                                .dropDownValueController4 ??=
                                             FormFieldController<String>(null),
                                         options: [
                                           'Option 1',
@@ -875,7 +1231,7 @@ class _WIDGETappointmentscentertopWidgetState
                                           'Option 3'
                                         ],
                                         onChanged: (val) => safeSetState(
-                                            () => _model.dropDownValue8 = val),
+                                            () => _model.dropDownValue4 = val),
                                         width: 200.0,
                                         height: 30.0,
                                         textStyle: FlutterFlowTheme.of(context)
@@ -1107,7 +1463,7 @@ class _WIDGETappointmentscentertopWidgetState
                                       ),
                                       child: FlutterFlowDropDown<String>(
                                         controller: _model
-                                                .dropDownValueController9 ??=
+                                                .dropDownValueController5 ??=
                                             FormFieldController<String>(null),
                                         options: [
                                           'Option 1',
@@ -1115,7 +1471,7 @@ class _WIDGETappointmentscentertopWidgetState
                                           'Option 3'
                                         ],
                                         onChanged: (val) => safeSetState(
-                                            () => _model.dropDownValue9 = val),
+                                            () => _model.dropDownValue5 = val),
                                         width: 120.0,
                                         height: 30.0,
                                         textStyle: FlutterFlowTheme.of(context)
@@ -1172,7 +1528,7 @@ class _WIDGETappointmentscentertopWidgetState
                                       ),
                                       child: FlutterFlowDropDown<String>(
                                         controller: _model
-                                                .dropDownValueController10 ??=
+                                                .dropDownValueController6 ??=
                                             FormFieldController<String>(null),
                                         options: [
                                           'Option 1',
@@ -1180,7 +1536,7 @@ class _WIDGETappointmentscentertopWidgetState
                                           'Option 3'
                                         ],
                                         onChanged: (val) => safeSetState(
-                                            () => _model.dropDownValue10 = val),
+                                            () => _model.dropDownValue6 = val),
                                         width: 120.0,
                                         height: 30.0,
                                         textStyle: FlutterFlowTheme.of(context)
@@ -1237,7 +1593,7 @@ class _WIDGETappointmentscentertopWidgetState
                                       ),
                                       child: FlutterFlowDropDown<String>(
                                         controller: _model
-                                                .dropDownValueController11 ??=
+                                                .dropDownValueController7 ??=
                                             FormFieldController<String>(null),
                                         options: [
                                           'Option 1',
@@ -1245,7 +1601,7 @@ class _WIDGETappointmentscentertopWidgetState
                                           'Option 3'
                                         ],
                                         onChanged: (val) => safeSetState(
-                                            () => _model.dropDownValue11 = val),
+                                            () => _model.dropDownValue7 = val),
                                         width: 120.0,
                                         height: 30.0,
                                         textStyle: FlutterFlowTheme.of(context)
@@ -1302,7 +1658,7 @@ class _WIDGETappointmentscentertopWidgetState
                                       ),
                                       child: FlutterFlowDropDown<String>(
                                         controller: _model
-                                                .dropDownValueController12 ??=
+                                                .dropDownValueController8 ??=
                                             FormFieldController<String>(null),
                                         options: [
                                           'Option 1',
@@ -1310,7 +1666,7 @@ class _WIDGETappointmentscentertopWidgetState
                                           'Option 3'
                                         ],
                                         onChanged: (val) => safeSetState(
-                                            () => _model.dropDownValue12 = val),
+                                            () => _model.dropDownValue8 = val),
                                         width: 120.0,
                                         height: 30.0,
                                         textStyle: FlutterFlowTheme.of(context)
@@ -1441,7 +1797,7 @@ class _WIDGETappointmentscentertopWidgetState
                                       decoration: BoxDecoration(),
                                       child: FlutterFlowDropDown<String>(
                                         controller: _model
-                                                .dropDownValueController13 ??=
+                                                .dropDownValueController9 ??=
                                             FormFieldController<String>(null),
                                         options: [
                                           'Option 1',
@@ -1449,7 +1805,7 @@ class _WIDGETappointmentscentertopWidgetState
                                           'Option 3'
                                         ],
                                         onChanged: (val) => safeSetState(
-                                            () => _model.dropDownValue13 = val),
+                                            () => _model.dropDownValue9 = val),
                                         width: 200.0,
                                         height: 30.0,
                                         textStyle: FlutterFlowTheme.of(context)
@@ -1502,7 +1858,7 @@ class _WIDGETappointmentscentertopWidgetState
                                       decoration: BoxDecoration(),
                                       child: FlutterFlowDropDown<String>(
                                         controller: _model
-                                                .dropDownValueController14 ??=
+                                                .dropDownValueController10 ??=
                                             FormFieldController<String>(null),
                                         options: [
                                           'Option 1',
@@ -1510,7 +1866,7 @@ class _WIDGETappointmentscentertopWidgetState
                                           'Option 3'
                                         ],
                                         onChanged: (val) => safeSetState(
-                                            () => _model.dropDownValue14 = val),
+                                            () => _model.dropDownValue10 = val),
                                         width: 200.0,
                                         height: 30.0,
                                         textStyle: FlutterFlowTheme.of(context)
@@ -1563,7 +1919,7 @@ class _WIDGETappointmentscentertopWidgetState
                                       decoration: BoxDecoration(),
                                       child: FlutterFlowDropDown<String>(
                                         controller: _model
-                                                .dropDownValueController15 ??=
+                                                .dropDownValueController11 ??=
                                             FormFieldController<String>(null),
                                         options: [
                                           'Option 1',
@@ -1571,7 +1927,7 @@ class _WIDGETappointmentscentertopWidgetState
                                           'Option 3'
                                         ],
                                         onChanged: (val) => safeSetState(
-                                            () => _model.dropDownValue15 = val),
+                                            () => _model.dropDownValue11 = val),
                                         width: 200.0,
                                         height: 30.0,
                                         textStyle: FlutterFlowTheme.of(context)
@@ -1624,7 +1980,7 @@ class _WIDGETappointmentscentertopWidgetState
                                       decoration: BoxDecoration(),
                                       child: FlutterFlowDropDown<String>(
                                         controller: _model
-                                                .dropDownValueController16 ??=
+                                                .dropDownValueController12 ??=
                                             FormFieldController<String>(null),
                                         options: [
                                           'Option 1',
@@ -1632,7 +1988,7 @@ class _WIDGETappointmentscentertopWidgetState
                                           'Option 3'
                                         ],
                                         onChanged: (val) => safeSetState(
-                                            () => _model.dropDownValue16 = val),
+                                            () => _model.dropDownValue12 = val),
                                         width: 200.0,
                                         height: 30.0,
                                         textStyle: FlutterFlowTheme.of(context)

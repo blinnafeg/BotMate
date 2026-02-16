@@ -747,49 +747,91 @@ class _WIDGETrecordsViewerWidgetState extends State<WIDGETrecordsViewerWidget> {
               builder: (context) {
                 final weekDaysRow = functions
                     .getCalendarDates(
-                        'week', FFAppState().WIDGETSDATA.appointmentsData)
+                        'month', FFAppState().WIDGETSDATA.appointmentsData)
                     .toList();
 
-                return Flex(
+                return Wrap(
+                  spacing: 5.0,
+                  runSpacing: 5.0,
+                  alignment: WrapAlignment.start,
+                  crossAxisAlignment: WrapCrossAlignment.start,
                   direction: Axis.horizontal,
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: List.generate(weekDaysRow.length,
-                          (weekDaysRowIndex) {
+                  runAlignment: WrapAlignment.start,
+                  verticalDirection: VerticalDirection.down,
+                  clipBehavior: Clip.none,
+                  children:
+                      List.generate(weekDaysRow.length, (weekDaysRowIndex) {
                     final weekDaysRowItem = weekDaysRow[weekDaysRowIndex];
-                    return Expanded(
-                      flex: 1,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                    return Container(
+                      width: 150.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.0),
+                        border: Border.all(
+                          color: FlutterFlowTheme.of(context).alternate,
+                          width: 1.0,
                         ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              weekDaysRowItem,
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                10.0, 0.0, 10.0, 0.0),
+                            child: Text(
+                              functions.getWeekDay(weekDaysRowItem),
                               style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
+                                  .titleMedium
                                   .override(
-                                    font: GoogleFonts.openSans(
+                                    font: GoogleFonts.openSansCondensed(
                                       fontWeight: FlutterFlowTheme.of(context)
-                                          .bodyMedium
+                                          .titleMedium
                                           .fontWeight,
                                       fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
+                                          .titleMedium
                                           .fontStyle,
                                     ),
                                     letterSpacing: 0.0,
                                     fontWeight: FlutterFlowTheme.of(context)
-                                        .bodyMedium
+                                        .titleMedium
                                         .fontWeight,
                                     fontStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
+                                        .titleMedium
                                         .fontStyle,
                                   ),
                             ),
-                            Builder(
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                10.0, 0.0, 10.0, 0.0),
+                            child: Text(
+                              functions.getWeekDay(
+                                  functions.formatDateRussian(weekDaysRowItem)),
+                              style: FlutterFlowTheme.of(context)
+                                  .labelSmall
+                                  .override(
+                                    font: GoogleFonts.openSans(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .labelSmall
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .labelSmall
+                                          .fontStyle,
+                                    ),
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .labelSmall
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .labelSmall
+                                        .fontStyle,
+                                  ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                10.0, 0.0, 10.0, 0.0),
+                            child: Builder(
                               builder: (context) {
                                 final weekDayRecordsRow = FFAppState()
                                     .WIDGETSDATA
@@ -810,48 +852,95 @@ class _WIDGETrecordsViewerWidgetState extends State<WIDGETrecordsViewerWidget> {
                                     final weekDayRecordsRowItem =
                                         weekDayRecordsRow[
                                             weekDayRecordsRowIndex];
-                                    return Text(
-                                      weekDayRecordsRowItem.appointmentDate,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            font: GoogleFonts.openSans(
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .fontStyle,
-                                            ),
-                                            letterSpacing: 0.0,
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontStyle,
+                                    return Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .success,
+                                            borderRadius:
+                                                BorderRadius.circular(4.0),
                                           ),
+                                          child: Padding(
+                                            padding: EdgeInsets.all(5.0),
+                                            child: Text(
+                                              weekDayRecordsRowItem
+                                                  .timeInterval,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    font: GoogleFonts.openSans(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
+                                            ),
+                                          ),
+                                        ),
+                                        Text(
+                                          weekDayRecordsRowItem.service.name,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodySmall
+                                              .override(
+                                                font: GoogleFonts.openSans(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodySmall
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodySmall
+                                                          .fontStyle,
+                                                ),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodySmall
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodySmall
+                                                        .fontStyle,
+                                              ),
+                                        ),
+                                      ],
                                     );
                                   },
                                 );
                               },
                             ),
-                          ],
-                        ),
+                          ),
+                        ]
+                            .addToStart(SizedBox(height: 10.0))
+                            .addToEnd(SizedBox(height: 10.0)),
                       ),
                     );
-                  })
-                      .divide(
-                          true ? SizedBox(width: 10.0) : SizedBox(height: 10.0))
-                      .addToStart(
-                          true ? SizedBox(width: 15.0) : SizedBox(height: 15.0))
-                      .addToEnd(true
-                          ? SizedBox(width: 15.0)
-                          : SizedBox(height: 15.0)),
+                  }),
                 );
               },
             ),

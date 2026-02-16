@@ -8,6 +8,19 @@ class WIDGETappointmentscentertopModel
     extends FlutterFlowModel<WIDGETappointmentscentertopWidget> {
   ///  State fields for stateful widgets in this component.
 
+  // State field(s) for serviceDropDown widget.
+  String? serviceDropDownValue;
+  FormFieldController<String>? serviceDropDownValueController;
+  DateTime? datePicked;
+  // State field(s) for masterDropDown widget.
+  String? masterDropDownValue;
+  FormFieldController<String>? masterDropDownValueController;
+  // State field(s) for slotDropDown widget.
+  String? slotDropDownValue;
+  FormFieldController<String>? slotDropDownValueController;
+  // State field(s) for clientDropDown widget.
+  String? clientDropDownValue;
+  FormFieldController<String>? clientDropDownValueController;
   // State field(s) for DropDown widget.
   String? dropDownValue1;
   FormFieldController<String>? dropDownValueController1;
@@ -44,18 +57,6 @@ class WIDGETappointmentscentertopModel
   // State field(s) for DropDown widget.
   String? dropDownValue12;
   FormFieldController<String>? dropDownValueController12;
-  // State field(s) for DropDown widget.
-  String? dropDownValue13;
-  FormFieldController<String>? dropDownValueController13;
-  // State field(s) for DropDown widget.
-  String? dropDownValue14;
-  FormFieldController<String>? dropDownValueController14;
-  // State field(s) for DropDown widget.
-  String? dropDownValue15;
-  FormFieldController<String>? dropDownValueController15;
-  // State field(s) for DropDown widget.
-  String? dropDownValue16;
-  FormFieldController<String>? dropDownValueController16;
 
   @override
   void initState(BuildContext context) {}

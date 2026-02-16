@@ -127,7 +127,9 @@ class _TestWidgetState extends State<TestWidget> {
                   flex: 6,
                   child: Container(
                     width: MediaQuery.sizeOf(context).width * 0.66,
-                    decoration: BoxDecoration(),
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
                     child: SingleChildScrollView(
                       child: Column(
                         mainAxisSize: MainAxisSize.max,

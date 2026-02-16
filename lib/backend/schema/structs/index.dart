@@ -1,6 +1,7 @@
 export '/backend/schema/util/schema_util.dart';
 
 export 'appointments_page_data_struct.dart';
+export 'booking_form_data_struct.dart';
 export 'daydate_struct.dart';
 export 'day_stats_struct.dart';
 export 'month_stats_struct.dart';
