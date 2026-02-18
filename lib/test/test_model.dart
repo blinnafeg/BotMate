@@ -1,4 +1,3 @@
-import '/components/w_i_d_g_e_tappointmentscentertop_widget.dart';
 import '/components/w_i_d_g_e_tcurentorganization_widget.dart';
 import '/components/w_i_d_g_e_tcurentorganizationrole_widget.dart';
 import '/components/w_i_d_g_e_trecords_viewer_widget.dart';
@@ -16,8 +15,6 @@ class TestModel extends FlutterFlowModel<TestWidget> {
   late WIDGETsidebarmainmenuModel wIDGETsidebarmainmenuModel;
   // Model for WIDGETcurentorganizationrole component.
   late WIDGETcurentorganizationroleModel wIDGETcurentorganizationroleModel;
-  // Model for WIDGETappointmentscentertop component.
-  late WIDGETappointmentscentertopModel wIDGETappointmentscentertopModel;
   // Model for WIDGETrecordsViewer component.
   late WIDGETrecordsViewerModel wIDGETrecordsViewerModel;
 
@@ -29,8 +26,6 @@ class TestModel extends FlutterFlowModel<TestWidget> {
         createModel(context, () => WIDGETsidebarmainmenuModel());
     wIDGETcurentorganizationroleModel =
         createModel(context, () => WIDGETcurentorganizationroleModel());
-    wIDGETappointmentscentertopModel =
-        createModel(context, () => WIDGETappointmentscentertopModel());
     wIDGETrecordsViewerModel =
         createModel(context, () => WIDGETrecordsViewerModel());
   }
@@ -40,7 +35,6 @@ class TestModel extends FlutterFlowModel<TestWidget> {
     wIDGETcurentorganizationModel.dispose();
     wIDGETsidebarmainmenuModel.dispose();
     wIDGETcurentorganizationroleModel.dispose();
-    wIDGETappointmentscentertopModel.dispose();
     wIDGETrecordsViewerModel.dispose();
   }
 }

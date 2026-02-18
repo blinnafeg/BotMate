@@ -258,3 +258,124 @@ String? getTargetDate(
     return DateFormat('yyyy-MM-dd').format(target);
   }
 }
+
+String getIdByName(
+  List<dynamic>? items,
+  String itemName,
+  String type,
+) {
+  if (items == null || items.isEmpty || itemName.isEmpty) {
+    return '';
+  }
+
+  try {
+    switch (type) {
+      case 'service':
+        final services = items.cast<ServiceStruct>();
+        final service = services.firstWhere(
+          (s) => s.name == itemName,
+          orElse: () => ServiceStruct(
+            // ВАЖНО: возвращаем пустую структуру, а не null
+            id: '',
+            name: '',
+            description: '',
+            durationMin: 0,
+            bufferTimeMin: 0,
+            price: 0,
+            photoUrl: '',
+            categoryId: '',
+            categoryName: '',
+            categoryIcon: '',
+            onlineBookingEnabled: false,
+            depositRequired: false,
+            depositAmount: 0,
+          ),
+        );
+        return service.id;
+
+      case 'master':
+        final masters = items.cast<MasterStruct>();
+        final master = masters.firstWhere(
+          (m) => m.name == itemName,
+          orElse: () => MasterStruct(
+            // Пустая структура
+            id: '',
+            name: '',
+            phone: '',
+            telegramId: '',
+            specialization: [],
+            isActive: false,
+          ),
+        );
+        return master.id;
+
+      case 'client':
+        final clients = items.cast<ClientStruct>();
+        final client = clients.firstWhere(
+          (c) => c.name == itemName,
+          orElse: () => ClientStruct(
+            // Пустая структура
+            id: '',
+            name: '',
+            phone: '',
+            telegramId: '',
+            createdAt: '',
+          ),
+        );
+        return client.id;
+
+      default:
+        return '';
+    }
+  } catch (e) {
+    print('Error getting ID by name: $e');
+    return '';
+  }
+}
+
+List<String> curentDateAsString(DateTime curentDate) {
+  // convert date time to list string as yyyy-MM-dd
+  String formattedDate = DateFormat('yyyy-MM-dd').format(curentDate);
+  return [formattedDate];
+}
+
+List<ClientStruct> searchClients(
+  List<ClientStruct> clients,
+  String searchText,
+) {
+// Если список пустой или текст поиска пустой - возвращаем весь список
+  if (clients == null || clients.isEmpty) {
+    return [];
+  }
+
+  if (searchText.isEmpty || searchText.length < 2) {
+    return clients; // возвращаем всех, если поисковый запрос слишком короткий
+  }
+
+  try {
+    // Приводим поисковый запрос к нижнему регистру для регистронезависимого поиска
+    final query = searchText.toLowerCase().trim();
+
+    // Фильтруем клиентов
+    final filtered = clients.where((client) {
+      // Поиск по имени
+      final nameMatch = client.name?.toLowerCase().contains(query) ?? false;
+
+      // Поиск по телефону (если есть)
+      final phoneMatch = client.phone?.toLowerCase().contains(query) ?? false;
+
+      // Поиск по telegram ID (если есть)
+      final telegramMatch =
+          client.telegramId?.toLowerCase().contains(query) ?? false;
+
+      return nameMatch || phoneMatch || telegramMatch;
+    }).toList();
+
+    print('🔍 Search for "$searchText" found ${filtered.length} clients');
+
+    return filtered;
+  } catch (e) {
+    print('Error searching clients: $e');
+    return clients; // в случае ошибки возвращаем исходный список
+  }
+}

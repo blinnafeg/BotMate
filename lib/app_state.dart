@@ -79,6 +79,22 @@ class FFAppState extends ChangeNotifier {
   void updateWIDGETSDATAStruct(Function(WidgetsDataStruct) updateFn) {
     updateFn(_WIDGETSDATA);
   }
+
+  String _WGHEADERSTYLE = '';
+  String get WGHEADERSTYLE => _WGHEADERSTYLE;
+  set WGHEADERSTYLE(String value) {
+    _WGHEADERSTYLE = value;
+  }
+
+  WidgetsStylesStruct _WIDGETSSTYLES = WidgetsStylesStruct();
+  WidgetsStylesStruct get WIDGETSSTYLES => _WIDGETSSTYLES;
+  set WIDGETSSTYLES(WidgetsStylesStruct value) {
+    _WIDGETSSTYLES = value;
+  }
+
+  void updateWIDGETSSTYLESStruct(Function(WidgetsStylesStruct) updateFn) {
+    updateFn(_WIDGETSSTYLES);
+  }
 }
 
 void _safeInit(Function() initializeField) {

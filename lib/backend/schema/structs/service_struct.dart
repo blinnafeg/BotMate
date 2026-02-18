@@ -55,7 +55,7 @@ class ServiceStruct extends BaseStruct {
 
   bool hasDescription() => _description != null;
 
-  // "durationMin" field.
+  // "duration_min" field.
   int? _durationMin;
   int get durationMin => _durationMin ?? 0;
   set durationMin(int? val) => _durationMin = val;
@@ -139,7 +139,7 @@ class ServiceStruct extends BaseStruct {
         id: data['id'] as String?,
         name: data['name'] as String?,
         description: data['description'] as String?,
-        durationMin: castToType<int>(data['durationMin']),
+        durationMin: castToType<int>(data['duration_min']),
         bufferTimeMin: castToType<int>(data['bufferTimeMin']),
         price: castToType<int>(data['price']),
         photoUrl: data['photoUrl'] as String?,
@@ -158,7 +158,7 @@ class ServiceStruct extends BaseStruct {
         'id': _id,
         'name': _name,
         'description': _description,
-        'durationMin': _durationMin,
+        'duration_min': _durationMin,
         'bufferTimeMin': _bufferTimeMin,
         'price': _price,
         'photoUrl': _photoUrl,
@@ -184,7 +184,7 @@ class ServiceStruct extends BaseStruct {
           _description,
           ParamType.String,
         ),
-        'durationMin': serializeParam(
+        'duration_min': serializeParam(
           _durationMin,
           ParamType.int,
         ),
@@ -244,7 +244,7 @@ class ServiceStruct extends BaseStruct {
           false,
         ),
         durationMin: deserializeParam(
-          data['durationMin'],
+          data['duration_min'],
           ParamType.int,
           false,
         ),

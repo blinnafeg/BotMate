@@ -1,7 +1,10 @@
+import '/components/wg_form_appointment_widget.dart';
+import '/components/wg_header_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'authorization_model.dart';
 export 'authorization_model.dart';
 
@@ -37,6 +40,8 @@ class _AuthorizationWidgetState extends State<AuthorizationWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -122,396 +127,107 @@ class _AuthorizationWidgetState extends State<AuthorizationWidget> {
         ),
         body: SafeArea(
           top: true,
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Container(
-                width: 300.0,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(20.0),
-                            child: Text(
-                              'LEFT  TOP',
-                              style: FlutterFlowTheme.of(context)
-                                  .headlineLarge
-                                  .override(
-                                    font: GoogleFonts.openSansCondensed(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .headlineLarge
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .headlineLarge
-                                          .fontStyle,
-                                    ),
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .headlineLarge
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .headlineLarge
-                                        .fontStyle,
-                                  ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.all(20.0),
-                              child: Text(
-                                'LEFT MIDDLE',
-                                style: FlutterFlowTheme.of(context)
-                                    .headlineLarge
-                                    .override(
-                                      font: GoogleFonts.openSansCondensed(
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .fontStyle,
-                                      ),
-                                      color: FlutterFlowTheme.of(context)
-                                          .alternate,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .headlineLarge
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .headlineLarge
-                                          .fontStyle,
-                                    ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(20.0),
-                            child: Text(
-                              'LEFT BOTTOM',
-                              style: FlutterFlowTheme.of(context)
-                                  .headlineLarge
-                                  .override(
-                                    font: GoogleFonts.openSansCondensed(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .headlineLarge
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .headlineLarge
-                                          .fontStyle,
-                                    ),
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .headlineLarge
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .headlineLarge
-                                        .fontStyle,
-                                  ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                width: 1.0,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  width: MediaQuery.sizeOf(context).width * 10.24,
+                  decoration: BoxDecoration(),
+                  child: Flex(
+                    direction: Axis.horizontal,
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.all(20.0),
-                              child: Text(
-                                'CENTER TOP',
-                                style: FlutterFlowTheme.of(context)
-                                    .headlineLarge
-                                    .override(
-                                      font: GoogleFonts.openSansCondensed(
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .fontStyle,
-                                      ),
-                                      color: FlutterFlowTheme.of(context)
-                                          .alternate,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .headlineLarge
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .headlineLarge
-                                          .fontStyle,
-                                    ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
                       Expanded(
+                        flex: 1,
                         child: Container(
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
                           ),
-                          child: Row(
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            border: Border.all(
+                              color: FlutterFlowTheme.of(context).alternate,
+                            ),
+                          ),
+                          child: Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              Padding(
-                                padding: EdgeInsets.all(20.0),
-                                child: Text(
-                                  'CENTER MIDDLE',
-                                  style: FlutterFlowTheme.of(context)
-                                      .headlineLarge
-                                      .override(
-                                        font: GoogleFonts.openSansCondensed(
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineLarge
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineLarge
-                                                  .fontStyle,
-                                        ),
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .fontStyle,
-                                      ),
+                              wrapWithModel(
+                                model: _model.wgHeaderModel,
+                                updateCallback: () => safeSetState(() {}),
+                                child: WgHeaderWidget(
+                                  style: valueOrDefault<String>(
+                                    FFAppState().WIDGETSSTYLES.wgHeader,
+                                    'WG_HEDAER_appointmentStart',
+                                  ),
                                 ),
                               ),
+                              if (FFAppState()
+                                      .WIDGETSSTYLES
+                                      .wgFormAppointment !=
+                                  'WG_FORM_appointmentHiden')
+                                wrapWithModel(
+                                  model: _model.wgFormAppointmentModel,
+                                  updateCallback: () => safeSetState(() {}),
+                                  child: WgFormAppointmentWidget(
+                                    style: FFAppState()
+                                        .WIDGETSSTYLES
+                                        .wgFormAppointment,
+                                  ),
+                                ),
                             ],
                           ),
                         ),
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.all(20.0),
-                              child: Text(
-                                'CENTER BOTTOM',
-                                style: FlutterFlowTheme.of(context)
-                                    .headlineLarge
-                                    .override(
-                                      font: GoogleFonts.openSansCondensed(
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .fontStyle,
-                                      ),
-                                      color: FlutterFlowTheme.of(context)
-                                          .alternate,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .headlineLarge
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .headlineLarge
-                                          .fontStyle,
-                                    ),
-                              ),
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            border: Border.all(
+                              color: FlutterFlowTheme.of(context).secondaryText,
                             ),
-                          ],
+                          ),
+                          child: Text(
+                            'Hello World',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  font: GoogleFonts.openSans(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
+                                ),
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
-              ),
-              Container(
-                width: 300.0,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(20.0),
-                            child: Text(
-                              'RIGHT TOP',
-                              style: FlutterFlowTheme.of(context)
-                                  .headlineLarge
-                                  .override(
-                                    font: GoogleFonts.openSansCondensed(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .headlineLarge
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .headlineLarge
-                                          .fontStyle,
-                                    ),
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .headlineLarge
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .headlineLarge
-                                        .fontStyle,
-                                  ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.all(20.0),
-                              child: Text(
-                                'RIGHT MIDDLE',
-                                style: FlutterFlowTheme.of(context)
-                                    .headlineLarge
-                                    .override(
-                                      font: GoogleFonts.openSansCondensed(
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .fontStyle,
-                                      ),
-                                      color: FlutterFlowTheme.of(context)
-                                          .alternate,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .headlineLarge
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .headlineLarge
-                                          .fontStyle,
-                                    ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(20.0),
-                            child: Text(
-                              'RIGHT BOTTOM',
-                              style: FlutterFlowTheme.of(context)
-                                  .headlineLarge
-                                  .override(
-                                    font: GoogleFonts.openSansCondensed(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .headlineLarge
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .headlineLarge
-                                          .fontStyle,
-                                    ),
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .headlineLarge
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .headlineLarge
-                                        .fontStyle,
-                                  ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

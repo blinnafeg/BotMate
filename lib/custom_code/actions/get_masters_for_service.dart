@@ -12,16 +12,37 @@ import 'package:flutter/material.dart';
 Future getMastersForService(
   String serviceId,
   String organizationId,
-  Future Function(List<MasterStruct> masters) onMastersLoaded,
+  Future Function(List<DropdownItemStruct> masters) onMastersLoaded,
 ) async {
   try {
     final supabase = SupaFlow.client;
+
+    print('📥 Loading masters for service: $serviceId');
+
     final data = await supabase.rpc('get_masters_for_service',
         params: {'p_service_id': serviceId, 'p_org_id': organizationId});
 
-    final masters = (data as List).map((j) => MasterStruct.fromMap(j)).toList();
+    if (data == null || data is! List) {
+      print('⚠️ No masters data returned');
+      await onMastersLoaded([]);
+      return;
+    }
+
+    final masters = (data as List).map((json) {
+      final map = json as Map<String, dynamic>;
+      return DropdownItemStruct(
+        id: map['id'] as String,
+        name: map['name'] as String,
+        phone: map['phone'] as String? ?? '',
+      );
+    }).toList();
+
+    print('✅ Loaded ${masters.length} masters');
+
     await onMastersLoaded(masters);
-  } catch (e) {
+  } catch (e, stackTrace) {
+    print('❌ Error loading masters: $e');
+    print('📚 Stack trace: $stackTrace');
     await onMastersLoaded([]);
   }
 }

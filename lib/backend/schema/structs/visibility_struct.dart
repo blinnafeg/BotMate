@@ -13,12 +13,18 @@ class VisibilityStruct extends BaseStruct {
     bool? todayRecordsListview,
     bool? weakRecordsListview,
     bool? monthCurentRecordsListview,
+    bool? serviceList,
+    bool? mastersList,
+    bool? slotsList,
   })  : _centerTopHeader = centerTopHeader,
         _centerTopSearch = centerTopSearch,
         _centerTopCreat = centerTopCreat,
         _todayRecordsListview = todayRecordsListview,
         _weakRecordsListview = weakRecordsListview,
-        _monthCurentRecordsListview = monthCurentRecordsListview;
+        _monthCurentRecordsListview = monthCurentRecordsListview,
+        _serviceList = serviceList,
+        _mastersList = mastersList,
+        _slotsList = slotsList;
 
   // "CENTER-TOP-HEADER" field.
   bool? _centerTopHeader;
@@ -63,6 +69,27 @@ class VisibilityStruct extends BaseStruct {
 
   bool hasMonthCurentRecordsListview() => _monthCurentRecordsListview != null;
 
+  // "SERVICE-LIST" field.
+  bool? _serviceList;
+  bool get serviceList => _serviceList ?? false;
+  set serviceList(bool? val) => _serviceList = val;
+
+  bool hasServiceList() => _serviceList != null;
+
+  // "MASTERS-LIST" field.
+  bool? _mastersList;
+  bool get mastersList => _mastersList ?? false;
+  set mastersList(bool? val) => _mastersList = val;
+
+  bool hasMastersList() => _mastersList != null;
+
+  // "SLOTS-LIST" field.
+  bool? _slotsList;
+  bool get slotsList => _slotsList ?? false;
+  set slotsList(bool? val) => _slotsList = val;
+
+  bool hasSlotsList() => _slotsList != null;
+
   static VisibilityStruct fromMap(Map<String, dynamic> data) =>
       VisibilityStruct(
         centerTopHeader: data['CENTER-TOP-HEADER'] as bool?,
@@ -72,6 +99,9 @@ class VisibilityStruct extends BaseStruct {
         weakRecordsListview: data['WEAK-RECORDS-LISTVIEW'] as bool?,
         monthCurentRecordsListview:
             data['MONTH-CURENT-RECORDS-LISTVIEW'] as bool?,
+        serviceList: data['SERVICE-LIST'] as bool?,
+        mastersList: data['MASTERS-LIST'] as bool?,
+        slotsList: data['SLOTS-LIST'] as bool?,
       );
 
   static VisibilityStruct? maybeFromMap(dynamic data) => data is Map
@@ -85,6 +115,9 @@ class VisibilityStruct extends BaseStruct {
         'TODAY-RECORDS-LISTVIEW': _todayRecordsListview,
         'WEAK-RECORDS-LISTVIEW': _weakRecordsListview,
         'MONTH-CURENT-RECORDS-LISTVIEW': _monthCurentRecordsListview,
+        'SERVICE-LIST': _serviceList,
+        'MASTERS-LIST': _mastersList,
+        'SLOTS-LIST': _slotsList,
       }.withoutNulls;
 
   @override
@@ -111,6 +144,18 @@ class VisibilityStruct extends BaseStruct {
         ),
         'MONTH-CURENT-RECORDS-LISTVIEW': serializeParam(
           _monthCurentRecordsListview,
+          ParamType.bool,
+        ),
+        'SERVICE-LIST': serializeParam(
+          _serviceList,
+          ParamType.bool,
+        ),
+        'MASTERS-LIST': serializeParam(
+          _mastersList,
+          ParamType.bool,
+        ),
+        'SLOTS-LIST': serializeParam(
+          _slotsList,
           ParamType.bool,
         ),
       }.withoutNulls;
@@ -147,6 +192,21 @@ class VisibilityStruct extends BaseStruct {
           ParamType.bool,
           false,
         ),
+        serviceList: deserializeParam(
+          data['SERVICE-LIST'],
+          ParamType.bool,
+          false,
+        ),
+        mastersList: deserializeParam(
+          data['MASTERS-LIST'],
+          ParamType.bool,
+          false,
+        ),
+        slotsList: deserializeParam(
+          data['SLOTS-LIST'],
+          ParamType.bool,
+          false,
+        ),
       );
 
   @override
@@ -160,7 +220,10 @@ class VisibilityStruct extends BaseStruct {
         centerTopCreat == other.centerTopCreat &&
         todayRecordsListview == other.todayRecordsListview &&
         weakRecordsListview == other.weakRecordsListview &&
-        monthCurentRecordsListview == other.monthCurentRecordsListview;
+        monthCurentRecordsListview == other.monthCurentRecordsListview &&
+        serviceList == other.serviceList &&
+        mastersList == other.mastersList &&
+        slotsList == other.slotsList;
   }
 
   @override
@@ -170,7 +233,10 @@ class VisibilityStruct extends BaseStruct {
         centerTopCreat,
         todayRecordsListview,
         weakRecordsListview,
-        monthCurentRecordsListview
+        monthCurentRecordsListview,
+        serviceList,
+        mastersList,
+        slotsList
       ]);
 }
 
@@ -181,6 +247,9 @@ VisibilityStruct createVisibilityStruct({
   bool? todayRecordsListview,
   bool? weakRecordsListview,
   bool? monthCurentRecordsListview,
+  bool? serviceList,
+  bool? mastersList,
+  bool? slotsList,
 }) =>
     VisibilityStruct(
       centerTopHeader: centerTopHeader,
@@ -189,4 +258,7 @@ VisibilityStruct createVisibilityStruct({
       todayRecordsListview: todayRecordsListview,
       weakRecordsListview: weakRecordsListview,
       monthCurentRecordsListview: monthCurentRecordsListview,
+      serviceList: serviceList,
+      mastersList: mastersList,
+      slotsList: slotsList,
     );

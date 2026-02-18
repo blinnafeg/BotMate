@@ -37,12 +37,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
-      errorBuilder: (context, state) => TestWidget(),
+      errorBuilder: (context, state) => AuthorizationWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => TestWidget(),
+          builder: (context, _) => AuthorizationWidget(),
         ),
         FFRoute(
           name: DashboardWidget.routeName,

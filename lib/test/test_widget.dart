@@ -1,4 +1,3 @@
-import '/components/w_i_d_g_e_tappointmentscentertop_widget.dart';
 import '/components/w_i_d_g_e_tcurentorganization_widget.dart';
 import '/components/w_i_d_g_e_tcurentorganizationrole_widget.dart';
 import '/components/w_i_d_g_e_trecords_viewer_widget.dart';
@@ -134,11 +133,6 @@ class _TestWidgetState extends State<TestWidget> {
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          wrapWithModel(
-                            model: _model.wIDGETappointmentscentertopModel,
-                            updateCallback: () => safeSetState(() {}),
-                            child: WIDGETappointmentscentertopWidget(),
-                          ),
                           Divider(
                             height: 1.0,
                             thickness: 0.0,

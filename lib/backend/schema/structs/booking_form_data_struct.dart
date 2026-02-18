@@ -6,67 +6,92 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class BookingFormDataStruct extends BaseStruct {
   BookingFormDataStruct({
-    List<ServiceStruct>? services,
-    List<ClientStruct>? clients,
-    List<MasterStruct>? mastersForService,
+    List<ServiceStruct>? servicesList,
+    List<ServiceStruct>? selectedServices,
+    List<MasterStruct>? mastersList,
+    List<MasterStruct>? selectedMasters,
+    List<ClientStruct>? clientsList,
+    List<ClientStruct>? selectedClient,
     List<String>? availableSlots,
-    String? selectedServiceId,
-    String? selectedClientId,
-    String? selectedMasterId,
-    String? selectedDate,
-    String? selectedTime,
-    String? notes,
-    bool? isLoadingServices,
-    bool? isLoadingMasters,
-    bool? isLoadingSlots,
-    bool? isCreating,
-  })  : _services = services,
-        _clients = clients,
-        _mastersForService = mastersForService,
+    List<String>? selectedSlot,
+    List<String>? selectedDate,
+    bool? calendarWeekView,
+  })  : _servicesList = servicesList,
+        _selectedServices = selectedServices,
+        _mastersList = mastersList,
+        _selectedMasters = selectedMasters,
+        _clientsList = clientsList,
+        _selectedClient = selectedClient,
         _availableSlots = availableSlots,
-        _selectedServiceId = selectedServiceId,
-        _selectedClientId = selectedClientId,
-        _selectedMasterId = selectedMasterId,
+        _selectedSlot = selectedSlot,
         _selectedDate = selectedDate,
-        _selectedTime = selectedTime,
-        _notes = notes,
-        _isLoadingServices = isLoadingServices,
-        _isLoadingMasters = isLoadingMasters,
-        _isLoadingSlots = isLoadingSlots,
-        _isCreating = isCreating;
+        _calendarWeekView = calendarWeekView;
 
-  // "services" field.
-  List<ServiceStruct>? _services;
-  List<ServiceStruct> get services => _services ?? const [];
-  set services(List<ServiceStruct>? val) => _services = val;
+  // "servicesList" field.
+  List<ServiceStruct>? _servicesList;
+  List<ServiceStruct> get servicesList => _servicesList ?? const [];
+  set servicesList(List<ServiceStruct>? val) => _servicesList = val;
 
-  void updateServices(Function(List<ServiceStruct>) updateFn) {
-    updateFn(_services ??= []);
+  void updateServicesList(Function(List<ServiceStruct>) updateFn) {
+    updateFn(_servicesList ??= []);
   }
 
-  bool hasServices() => _services != null;
+  bool hasServicesList() => _servicesList != null;
 
-  // "clients" field.
-  List<ClientStruct>? _clients;
-  List<ClientStruct> get clients => _clients ?? const [];
-  set clients(List<ClientStruct>? val) => _clients = val;
+  // "selectedServices" field.
+  List<ServiceStruct>? _selectedServices;
+  List<ServiceStruct> get selectedServices => _selectedServices ?? const [];
+  set selectedServices(List<ServiceStruct>? val) => _selectedServices = val;
 
-  void updateClients(Function(List<ClientStruct>) updateFn) {
-    updateFn(_clients ??= []);
+  void updateSelectedServices(Function(List<ServiceStruct>) updateFn) {
+    updateFn(_selectedServices ??= []);
   }
 
-  bool hasClients() => _clients != null;
+  bool hasSelectedServices() => _selectedServices != null;
 
-  // "mastersForService" field.
-  List<MasterStruct>? _mastersForService;
-  List<MasterStruct> get mastersForService => _mastersForService ?? const [];
-  set mastersForService(List<MasterStruct>? val) => _mastersForService = val;
+  // "mastersList" field.
+  List<MasterStruct>? _mastersList;
+  List<MasterStruct> get mastersList => _mastersList ?? const [];
+  set mastersList(List<MasterStruct>? val) => _mastersList = val;
 
-  void updateMastersForService(Function(List<MasterStruct>) updateFn) {
-    updateFn(_mastersForService ??= []);
+  void updateMastersList(Function(List<MasterStruct>) updateFn) {
+    updateFn(_mastersList ??= []);
   }
 
-  bool hasMastersForService() => _mastersForService != null;
+  bool hasMastersList() => _mastersList != null;
+
+  // "selectedMasters" field.
+  List<MasterStruct>? _selectedMasters;
+  List<MasterStruct> get selectedMasters => _selectedMasters ?? const [];
+  set selectedMasters(List<MasterStruct>? val) => _selectedMasters = val;
+
+  void updateSelectedMasters(Function(List<MasterStruct>) updateFn) {
+    updateFn(_selectedMasters ??= []);
+  }
+
+  bool hasSelectedMasters() => _selectedMasters != null;
+
+  // "clientsList" field.
+  List<ClientStruct>? _clientsList;
+  List<ClientStruct> get clientsList => _clientsList ?? const [];
+  set clientsList(List<ClientStruct>? val) => _clientsList = val;
+
+  void updateClientsList(Function(List<ClientStruct>) updateFn) {
+    updateFn(_clientsList ??= []);
+  }
+
+  bool hasClientsList() => _clientsList != null;
+
+  // "selectedClient" field.
+  List<ClientStruct>? _selectedClient;
+  List<ClientStruct> get selectedClient => _selectedClient ?? const [];
+  set selectedClient(List<ClientStruct>? val) => _selectedClient = val;
+
+  void updateSelectedClient(Function(List<ClientStruct>) updateFn) {
+    updateFn(_selectedClient ??= []);
+  }
+
+  bool hasSelectedClient() => _selectedClient != null;
 
   // "availableSlots" field.
   List<String>? _availableSlots;
@@ -79,101 +104,65 @@ class BookingFormDataStruct extends BaseStruct {
 
   bool hasAvailableSlots() => _availableSlots != null;
 
-  // "selectedServiceId" field.
-  String? _selectedServiceId;
-  String get selectedServiceId => _selectedServiceId ?? '';
-  set selectedServiceId(String? val) => _selectedServiceId = val;
+  // "selectedSlot" field.
+  List<String>? _selectedSlot;
+  List<String> get selectedSlot => _selectedSlot ?? const [];
+  set selectedSlot(List<String>? val) => _selectedSlot = val;
 
-  bool hasSelectedServiceId() => _selectedServiceId != null;
+  void updateSelectedSlot(Function(List<String>) updateFn) {
+    updateFn(_selectedSlot ??= []);
+  }
 
-  // "selectedClientId" field.
-  String? _selectedClientId;
-  String get selectedClientId => _selectedClientId ?? '';
-  set selectedClientId(String? val) => _selectedClientId = val;
-
-  bool hasSelectedClientId() => _selectedClientId != null;
-
-  // "selectedMasterId" field.
-  String? _selectedMasterId;
-  String get selectedMasterId => _selectedMasterId ?? '';
-  set selectedMasterId(String? val) => _selectedMasterId = val;
-
-  bool hasSelectedMasterId() => _selectedMasterId != null;
+  bool hasSelectedSlot() => _selectedSlot != null;
 
   // "selectedDate" field.
-  String? _selectedDate;
-  String get selectedDate => _selectedDate ?? '';
-  set selectedDate(String? val) => _selectedDate = val;
+  List<String>? _selectedDate;
+  List<String> get selectedDate => _selectedDate ?? const [];
+  set selectedDate(List<String>? val) => _selectedDate = val;
+
+  void updateSelectedDate(Function(List<String>) updateFn) {
+    updateFn(_selectedDate ??= []);
+  }
 
   bool hasSelectedDate() => _selectedDate != null;
 
-  // "selectedTime" field.
-  String? _selectedTime;
-  String get selectedTime => _selectedTime ?? '';
-  set selectedTime(String? val) => _selectedTime = val;
+  // "calendarWeekView" field.
+  bool? _calendarWeekView;
+  bool get calendarWeekView => _calendarWeekView ?? false;
+  set calendarWeekView(bool? val) => _calendarWeekView = val;
 
-  bool hasSelectedTime() => _selectedTime != null;
-
-  // "notes" field.
-  String? _notes;
-  String get notes => _notes ?? '';
-  set notes(String? val) => _notes = val;
-
-  bool hasNotes() => _notes != null;
-
-  // "isLoadingServices" field.
-  bool? _isLoadingServices;
-  bool get isLoadingServices => _isLoadingServices ?? false;
-  set isLoadingServices(bool? val) => _isLoadingServices = val;
-
-  bool hasIsLoadingServices() => _isLoadingServices != null;
-
-  // "isLoadingMasters" field.
-  bool? _isLoadingMasters;
-  bool get isLoadingMasters => _isLoadingMasters ?? false;
-  set isLoadingMasters(bool? val) => _isLoadingMasters = val;
-
-  bool hasIsLoadingMasters() => _isLoadingMasters != null;
-
-  // "isLoadingSlots" field.
-  bool? _isLoadingSlots;
-  bool get isLoadingSlots => _isLoadingSlots ?? false;
-  set isLoadingSlots(bool? val) => _isLoadingSlots = val;
-
-  bool hasIsLoadingSlots() => _isLoadingSlots != null;
-
-  // "isCreating" field.
-  bool? _isCreating;
-  bool get isCreating => _isCreating ?? false;
-  set isCreating(bool? val) => _isCreating = val;
-
-  bool hasIsCreating() => _isCreating != null;
+  bool hasCalendarWeekView() => _calendarWeekView != null;
 
   static BookingFormDataStruct fromMap(Map<String, dynamic> data) =>
       BookingFormDataStruct(
-        services: getStructList(
-          data['services'],
+        servicesList: getStructList(
+          data['servicesList'],
           ServiceStruct.fromMap,
         ),
-        clients: getStructList(
-          data['clients'],
-          ClientStruct.fromMap,
+        selectedServices: getStructList(
+          data['selectedServices'],
+          ServiceStruct.fromMap,
         ),
-        mastersForService: getStructList(
-          data['mastersForService'],
+        mastersList: getStructList(
+          data['mastersList'],
           MasterStruct.fromMap,
         ),
+        selectedMasters: getStructList(
+          data['selectedMasters'],
+          MasterStruct.fromMap,
+        ),
+        clientsList: getStructList(
+          data['clientsList'],
+          ClientStruct.fromMap,
+        ),
+        selectedClient: getStructList(
+          data['selectedClient'],
+          ClientStruct.fromMap,
+        ),
         availableSlots: getDataList(data['availableSlots']),
-        selectedServiceId: data['selectedServiceId'] as String?,
-        selectedClientId: data['selectedClientId'] as String?,
-        selectedMasterId: data['selectedMasterId'] as String?,
-        selectedDate: data['selectedDate'] as String?,
-        selectedTime: data['selectedTime'] as String?,
-        notes: data['notes'] as String?,
-        isLoadingServices: data['isLoadingServices'] as bool?,
-        isLoadingMasters: data['isLoadingMasters'] as bool?,
-        isLoadingSlots: data['isLoadingSlots'] as bool?,
-        isCreating: data['isCreating'] as bool?,
+        selectedSlot: getDataList(data['selectedSlot']),
+        selectedDate: getDataList(data['selectedDate']),
+        calendarWeekView: data['calendarWeekView'] as bool?,
       );
 
   static BookingFormDataStruct? maybeFromMap(dynamic data) => data is Map
@@ -181,36 +170,47 @@ class BookingFormDataStruct extends BaseStruct {
       : null;
 
   Map<String, dynamic> toMap() => {
-        'services': _services?.map((e) => e.toMap()).toList(),
-        'clients': _clients?.map((e) => e.toMap()).toList(),
-        'mastersForService': _mastersForService?.map((e) => e.toMap()).toList(),
+        'servicesList': _servicesList?.map((e) => e.toMap()).toList(),
+        'selectedServices': _selectedServices?.map((e) => e.toMap()).toList(),
+        'mastersList': _mastersList?.map((e) => e.toMap()).toList(),
+        'selectedMasters': _selectedMasters?.map((e) => e.toMap()).toList(),
+        'clientsList': _clientsList?.map((e) => e.toMap()).toList(),
+        'selectedClient': _selectedClient?.map((e) => e.toMap()).toList(),
         'availableSlots': _availableSlots,
-        'selectedServiceId': _selectedServiceId,
-        'selectedClientId': _selectedClientId,
-        'selectedMasterId': _selectedMasterId,
+        'selectedSlot': _selectedSlot,
         'selectedDate': _selectedDate,
-        'selectedTime': _selectedTime,
-        'notes': _notes,
-        'isLoadingServices': _isLoadingServices,
-        'isLoadingMasters': _isLoadingMasters,
-        'isLoadingSlots': _isLoadingSlots,
-        'isCreating': _isCreating,
+        'calendarWeekView': _calendarWeekView,
       }.withoutNulls;
 
   @override
   Map<String, dynamic> toSerializableMap() => {
-        'services': serializeParam(
-          _services,
+        'servicesList': serializeParam(
+          _servicesList,
           ParamType.DataStruct,
           isList: true,
         ),
-        'clients': serializeParam(
-          _clients,
+        'selectedServices': serializeParam(
+          _selectedServices,
           ParamType.DataStruct,
           isList: true,
         ),
-        'mastersForService': serializeParam(
-          _mastersForService,
+        'mastersList': serializeParam(
+          _mastersList,
+          ParamType.DataStruct,
+          isList: true,
+        ),
+        'selectedMasters': serializeParam(
+          _selectedMasters,
+          ParamType.DataStruct,
+          isList: true,
+        ),
+        'clientsList': serializeParam(
+          _clientsList,
+          ParamType.DataStruct,
+          isList: true,
+        ),
+        'selectedClient': serializeParam(
+          _selectedClient,
           ParamType.DataStruct,
           isList: true,
         ),
@@ -219,120 +219,77 @@ class BookingFormDataStruct extends BaseStruct {
           ParamType.String,
           isList: true,
         ),
-        'selectedServiceId': serializeParam(
-          _selectedServiceId,
+        'selectedSlot': serializeParam(
+          _selectedSlot,
           ParamType.String,
-        ),
-        'selectedClientId': serializeParam(
-          _selectedClientId,
-          ParamType.String,
-        ),
-        'selectedMasterId': serializeParam(
-          _selectedMasterId,
-          ParamType.String,
+          isList: true,
         ),
         'selectedDate': serializeParam(
           _selectedDate,
           ParamType.String,
+          isList: true,
         ),
-        'selectedTime': serializeParam(
-          _selectedTime,
-          ParamType.String,
-        ),
-        'notes': serializeParam(
-          _notes,
-          ParamType.String,
-        ),
-        'isLoadingServices': serializeParam(
-          _isLoadingServices,
-          ParamType.bool,
-        ),
-        'isLoadingMasters': serializeParam(
-          _isLoadingMasters,
-          ParamType.bool,
-        ),
-        'isLoadingSlots': serializeParam(
-          _isLoadingSlots,
-          ParamType.bool,
-        ),
-        'isCreating': serializeParam(
-          _isCreating,
+        'calendarWeekView': serializeParam(
+          _calendarWeekView,
           ParamType.bool,
         ),
       }.withoutNulls;
 
   static BookingFormDataStruct fromSerializableMap(Map<String, dynamic> data) =>
       BookingFormDataStruct(
-        services: deserializeStructParam<ServiceStruct>(
-          data['services'],
+        servicesList: deserializeStructParam<ServiceStruct>(
+          data['servicesList'],
           ParamType.DataStruct,
           true,
           structBuilder: ServiceStruct.fromSerializableMap,
         ),
-        clients: deserializeStructParam<ClientStruct>(
-          data['clients'],
+        selectedServices: deserializeStructParam<ServiceStruct>(
+          data['selectedServices'],
+          ParamType.DataStruct,
+          true,
+          structBuilder: ServiceStruct.fromSerializableMap,
+        ),
+        mastersList: deserializeStructParam<MasterStruct>(
+          data['mastersList'],
+          ParamType.DataStruct,
+          true,
+          structBuilder: MasterStruct.fromSerializableMap,
+        ),
+        selectedMasters: deserializeStructParam<MasterStruct>(
+          data['selectedMasters'],
+          ParamType.DataStruct,
+          true,
+          structBuilder: MasterStruct.fromSerializableMap,
+        ),
+        clientsList: deserializeStructParam<ClientStruct>(
+          data['clientsList'],
           ParamType.DataStruct,
           true,
           structBuilder: ClientStruct.fromSerializableMap,
         ),
-        mastersForService: deserializeStructParam<MasterStruct>(
-          data['mastersForService'],
+        selectedClient: deserializeStructParam<ClientStruct>(
+          data['selectedClient'],
           ParamType.DataStruct,
           true,
-          structBuilder: MasterStruct.fromSerializableMap,
+          structBuilder: ClientStruct.fromSerializableMap,
         ),
         availableSlots: deserializeParam<String>(
           data['availableSlots'],
           ParamType.String,
           true,
         ),
-        selectedServiceId: deserializeParam(
-          data['selectedServiceId'],
+        selectedSlot: deserializeParam<String>(
+          data['selectedSlot'],
           ParamType.String,
-          false,
+          true,
         ),
-        selectedClientId: deserializeParam(
-          data['selectedClientId'],
-          ParamType.String,
-          false,
-        ),
-        selectedMasterId: deserializeParam(
-          data['selectedMasterId'],
-          ParamType.String,
-          false,
-        ),
-        selectedDate: deserializeParam(
+        selectedDate: deserializeParam<String>(
           data['selectedDate'],
           ParamType.String,
-          false,
+          true,
         ),
-        selectedTime: deserializeParam(
-          data['selectedTime'],
-          ParamType.String,
-          false,
-        ),
-        notes: deserializeParam(
-          data['notes'],
-          ParamType.String,
-          false,
-        ),
-        isLoadingServices: deserializeParam(
-          data['isLoadingServices'],
-          ParamType.bool,
-          false,
-        ),
-        isLoadingMasters: deserializeParam(
-          data['isLoadingMasters'],
-          ParamType.bool,
-          false,
-        ),
-        isLoadingSlots: deserializeParam(
-          data['isLoadingSlots'],
-          ParamType.bool,
-          false,
-        ),
-        isCreating: deserializeParam(
-          data['isCreating'],
+        calendarWeekView: deserializeParam(
+          data['calendarWeekView'],
           ParamType.bool,
           false,
         ),
@@ -345,62 +302,36 @@ class BookingFormDataStruct extends BaseStruct {
   bool operator ==(Object other) {
     const listEquality = ListEquality();
     return other is BookingFormDataStruct &&
-        listEquality.equals(services, other.services) &&
-        listEquality.equals(clients, other.clients) &&
-        listEquality.equals(mastersForService, other.mastersForService) &&
+        listEquality.equals(servicesList, other.servicesList) &&
+        listEquality.equals(selectedServices, other.selectedServices) &&
+        listEquality.equals(mastersList, other.mastersList) &&
+        listEquality.equals(selectedMasters, other.selectedMasters) &&
+        listEquality.equals(clientsList, other.clientsList) &&
+        listEquality.equals(selectedClient, other.selectedClient) &&
         listEquality.equals(availableSlots, other.availableSlots) &&
-        selectedServiceId == other.selectedServiceId &&
-        selectedClientId == other.selectedClientId &&
-        selectedMasterId == other.selectedMasterId &&
-        selectedDate == other.selectedDate &&
-        selectedTime == other.selectedTime &&
-        notes == other.notes &&
-        isLoadingServices == other.isLoadingServices &&
-        isLoadingMasters == other.isLoadingMasters &&
-        isLoadingSlots == other.isLoadingSlots &&
-        isCreating == other.isCreating;
+        listEquality.equals(selectedSlot, other.selectedSlot) &&
+        listEquality.equals(selectedDate, other.selectedDate) &&
+        calendarWeekView == other.calendarWeekView;
   }
 
   @override
   int get hashCode => const ListEquality().hash([
-        services,
-        clients,
-        mastersForService,
+        servicesList,
+        selectedServices,
+        mastersList,
+        selectedMasters,
+        clientsList,
+        selectedClient,
         availableSlots,
-        selectedServiceId,
-        selectedClientId,
-        selectedMasterId,
+        selectedSlot,
         selectedDate,
-        selectedTime,
-        notes,
-        isLoadingServices,
-        isLoadingMasters,
-        isLoadingSlots,
-        isCreating
+        calendarWeekView
       ]);
 }
 
 BookingFormDataStruct createBookingFormDataStruct({
-  String? selectedServiceId,
-  String? selectedClientId,
-  String? selectedMasterId,
-  String? selectedDate,
-  String? selectedTime,
-  String? notes,
-  bool? isLoadingServices,
-  bool? isLoadingMasters,
-  bool? isLoadingSlots,
-  bool? isCreating,
+  bool? calendarWeekView,
 }) =>
     BookingFormDataStruct(
-      selectedServiceId: selectedServiceId,
-      selectedClientId: selectedClientId,
-      selectedMasterId: selectedMasterId,
-      selectedDate: selectedDate,
-      selectedTime: selectedTime,
-      notes: notes,
-      isLoadingServices: isLoadingServices,
-      isLoadingMasters: isLoadingMasters,
-      isLoadingSlots: isLoadingSlots,
-      isCreating: isCreating,
+      calendarWeekView: calendarWeekView,
     );
