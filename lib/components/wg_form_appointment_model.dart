@@ -7,7 +7,7 @@ class WgFormAppointmentModel extends FlutterFlowModel<WgFormAppointmentWidget> {
   ///  State fields for stateful widgets in this component.
 
   // Stores action output result for [Custom Action - loadAvailableSlots] action in Button widget.
-  List<String>? slotsDataDay;
+  List<String>? slotsDataDay1;
   // Stores action output result for [Custom Action - loadAvailableSlots] action in Button widget.
   List<String>? slotsDataWeek;
   // Stores action output result for [Custom Action - loadAvailableSlots] action in Button widget.

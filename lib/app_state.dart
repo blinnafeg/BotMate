@@ -80,12 +80,6 @@ class FFAppState extends ChangeNotifier {
     updateFn(_WIDGETSDATA);
   }
 
-  String _WGHEADERSTYLE = '';
-  String get WGHEADERSTYLE => _WGHEADERSTYLE;
-  set WGHEADERSTYLE(String value) {
-    _WGHEADERSTYLE = value;
-  }
-
   WidgetsStylesStruct _WIDGETSSTYLES = WidgetsStylesStruct();
   WidgetsStylesStruct get WIDGETSSTYLES => _WIDGETSSTYLES;
   set WIDGETSSTYLES(WidgetsStylesStruct value) {

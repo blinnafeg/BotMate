@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import '/backend/schema/structs/index.dart';
 
 
-import '/main.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 import '/index.dart';
@@ -45,62 +44,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, _) => AuthorizationWidget(),
         ),
         FFRoute(
-          name: DashboardWidget.routeName,
-          path: DashboardWidget.routePath,
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'dashboard')
-              : DashboardWidget(),
-        ),
-        FFRoute(
-          name: SettingsWidget.routeName,
-          path: SettingsWidget.routePath,
-          builder: (context, params) => SettingsWidget(),
-        ),
-        FFRoute(
-          name: StaffWidget.routeName,
-          path: StaffWidget.routePath,
-          builder: (context, params) => StaffWidget(),
-        ),
-        FFRoute(
-          name: ClientsWidget.routeName,
-          path: ClientsWidget.routePath,
-          builder: (context, params) => ClientsWidget(),
-        ),
-        FFRoute(
           name: AuthorizationWidget.routeName,
           path: AuthorizationWidget.routePath,
           builder: (context, params) => AuthorizationWidget(),
-        ),
-        FFRoute(
-          name: PagepaternWidget.routeName,
-          path: PagepaternWidget.routePath,
-          builder: (context, params) => PagepaternWidget(),
-        ),
-        FFRoute(
-          name: AppointmentsWidget.routeName,
-          path: AppointmentsWidget.routePath,
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'appointments')
-              : AppointmentsWidget(),
-        ),
-        FFRoute(
-          name: TestWidget.routeName,
-          path: TestWidget.routePath,
-          builder: (context, params) => TestWidget(),
-        ),
-        FFRoute(
-          name: PagegridsampleWidget.routeName,
-          path: PagegridsampleWidget.routePath,
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'pagegridsample')
-              : PagegridsampleWidget(),
-        ),
-        FFRoute(
-          name: Pagegridsample1Widget.routeName,
-          path: Pagegridsample1Widget.routePath,
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'pagegridsample1')
-              : Pagegridsample1Widget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

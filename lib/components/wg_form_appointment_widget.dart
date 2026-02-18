@@ -172,10 +172,18 @@ class _WgFormAppointmentWidgetState extends State<WgFormAppointmentWidget> {
                                     ..selectedSlot = [],
                                 ),
                             );
-                            FFAppState().WGHEADERSTYLE =
-                                'WG_FORM_appointmentStart';
                             _model.updatePage(() {});
-                            _model.slotsDataDay =
+                            FFAppState().updateWIDGETSDATAStruct(
+                              (e) => e
+                                ..updateBookingFormData(
+                                  (e) => e
+                                    ..availableSlots =
+                                        _model.slotsDataDay1!.toList()
+                                    ..selectedSlot = [],
+                                ),
+                            );
+                            _model.updatePage(() {});
+                            _model.slotsDataDay1 =
                                 await actions.loadAvailableSlots(
                               '22222222-2222-2222-2222-222222222222',
                               FFAppState()
@@ -190,16 +198,6 @@ class _WgFormAppointmentWidgetState extends State<WgFormAppointmentWidget> {
                                   .selectedDate
                                   .firstOrNull!,
                             );
-                            FFAppState().updateWIDGETSDATAStruct(
-                              (e) => e
-                                ..updateBookingFormData(
-                                  (e) => e
-                                    ..availableSlots =
-                                        _model.slotsDataDay!.toList()
-                                    ..selectedSlot = [],
-                                ),
-                            );
-                            _model.updatePage(() {});
 
                             safeSetState(() {});
                           },
@@ -410,11 +408,6 @@ class _WgFormAppointmentWidgetState extends State<WgFormAppointmentWidget> {
                                 'WG_FORM_appointmentSelectSlot',
                         );
                         _model.updatePage(() {});
-                        await actions.loadAvailableSlots(
-                          '22222222-2222-2222-2222-222222222222',
-                          '',
-                          '',
-                        );
                       },
                       text: 'Время',
                       options: FFButtonOptions(
